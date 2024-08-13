@@ -1,4 +1,5 @@
 import re
+import argparse
 
 class Cell:
     def __init__(self, name):
@@ -46,9 +47,11 @@ def parse_edif(file_path):
     return top_level_cells
 
 def main():
-    # Replace 'netlist.edf' with the path to your actual EDIF netlist file
-    file_path = 'netlist.edf'
-    top_level_cells = parse_edif(file_path)
+    parser = argparse.ArgumentParser(description='Parse an EDIF netlist file and print the hierarchy of cells.')
+    parser.add_argument('file_path', type=str, help='The path to the EDIF netlist file')
+    args = parser.parse_args()
+
+    top_level_cells = parse_edif(args.file_path)
     
     if top_level_cells:
         print("Hierarchical Structure of Cells:")
@@ -59,3 +62,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
